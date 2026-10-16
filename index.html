@@ -2,488 +2,85 @@
 <html lang="ca">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0b1220">
-<!-- tret el 16/10: aquesta línia fa que iOS obri la pàgina en mode aplicació, i en aquest
-         mode una adreça http amb port no estàndard falla. Sense la línia, la drecera de la
-         pantalla d inici obre la pàgina com una pestanya normal i funciona. -->
 <title>Viatge Andalusia · 19–26 octubre 2026</title>
 <style>
-  :root{
-    --bg:#0b1220; --bgsoft:#0f1a30; --panel:#131f38; --panel2:#16233f;
-    --border:#24344f; --line:#1c2b46;
-    --txt:#eaf0f9; --muted:#8da2c0; --dim:#5d7294;
-    --accent:#f5b942; --accent2:#e07a3f; --good:#3ddc84; --warn:#fbbf24; --bad:#f87171;
-    --rad:16px;
-  }
+  :root{--bg:#0b1220;--soft:#0f1a30;--panel:#182545;--border:#24344f;--txt:#eaf0f9;
+    --muted:#8da2c0;--accent:#f5b942;--rad:14px}
   *{box-sizing:border-box;margin:0;padding:0}
-  html{-webkit-text-size-adjust:100%}
-  body{
-    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:
-      radial-gradient(700px 400px at 85% -10%, rgba(245,185,66,.10), transparent 60%),
-      radial-gradient(600px 350px at 0% 105%, rgba(224,122,63,.07), transparent 60%),
-      linear-gradient(180deg,var(--bg) 0%,var(--bgsoft) 100%);
-    color:var(--txt); line-height:1.5; min-height:100vh;
-    padding:16px 14px 70px; font-size:17px;
-  }
-  .wrap{max-width:720px;margin:0 auto}
-
-  /* ---------- CAPÇALERA ---------- */
-  header.hero{
-    background:linear-gradient(135deg,rgba(245,185,66,.16),rgba(224,122,63,.10) 60%,rgba(61,220,132,.08));
-    border:1px solid var(--border); border-radius:20px;
-    padding:22px 20px; margin-bottom:18px;
-  }
-  .kicker{font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
-  header.hero h1{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;line-height:1.2}
-  header.hero .idt{color:var(--muted);margin-top:8px;font-size:.9rem}
-  .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
-  .cd-box{background:rgba(10,20,40,.55);border:1px solid var(--line);border-radius:12px;padding:10px 4px;text-align:center}
-  .cd-box .n{font-size:1.5rem;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1}
-  .cd-box .l{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:5px}
-  .cd-msg{margin-top:12px;font-size:.85rem;color:var(--good);font-weight:700}
-
-  /* ---------- SECCIONS ---------- */
-  section{background:var(--panel);border:1px solid var(--border);border-radius:var(--rad);
-    padding:20px 18px;margin-bottom:16px}
-  .sec-title{display:flex;align-items:center;gap:9px;font-size:1rem;font-weight:800;margin-bottom:14px}
-  .sec-title .bar{width:5px;height:19px;border-radius:3px;background:linear-gradient(180deg,var(--accent),var(--accent2));flex:none}
-  .lead{color:var(--muted);font-size:.88rem;margin-bottom:12px}
-
-  /* ---------- DIES: mobil primer ---------- */
-  .route{display:grid;gap:12px}
-  .day{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:15px 16px}
-  .day.payed{border-left:4px solid var(--good)}
-  .day .cap{display:flex;align-items:baseline;gap:11px;margin-bottom:6px}
-  .day .num{font-size:1.5rem;font-weight:800;color:var(--accent);line-height:1;flex:none}
-  .day h3{font-size:1.05rem;font-weight:800;line-height:1.25}
-  .day .km{display:inline-block;font-size:.8rem;font-weight:700;color:var(--accent2);margin-bottom:7px}
-  .day p{color:var(--muted);font-size:.9rem;margin-bottom:5px}
-  .day ul{margin:6px 0 0 20px;color:var(--muted);font-size:.88rem}
-  .day li{margin-bottom:3px}
-  .day li b{color:var(--txt)}
-  .tags{margin-top:9px;display:flex;flex-wrap:wrap;gap:6px}
-  .tag{display:inline-block;font-size:.72rem;font-weight:700;padding:5px 11px;border-radius:20px;
-    background:rgba(61,220,132,.12);color:var(--good)}
-  .tag.hot{background:rgba(251,191,36,.14);color:var(--warn)}
-  .tag.sorp{background:rgba(167,139,250,.16);color:#c4b5fd}
-  .tag.plain{background:rgba(141,162,192,.13);color:var(--muted)}
-
-  /* ---------- BOTONS (grans, per al dit) ---------- */
-  .btn{display:block;text-align:center;text-decoration:none;font-weight:800;font-size:.92rem;
-    padding:13px 14px;border-radius:12px;margin-top:10px;border:1px solid var(--border);
-    background:rgba(245,185,66,.12);color:var(--accent)}
-  .btn:active{transform:scale(.985)}
-  .btn.tel{background:rgba(61,220,132,.12);color:var(--good)}
-  .btn.soft{background:rgba(141,162,192,.10);color:var(--muted)}
-
-  /* ---------- TARGETES ---------- */
-  .card{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px}
-  .card:last-child{margin-bottom:0}
-  .card .city{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--accent);margin-bottom:5px}
-  .card h4{font-size:1.05rem;font-weight:800;margin-bottom:9px;line-height:1.3}
-  .card .addr{color:var(--muted);font-size:.86rem;line-height:1.5;margin-bottom:4px}
-  .card .mini{color:var(--dim);font-size:.8rem;margin-top:8px;line-height:1.45}
-
-  /* ---------- LLISTA DE FETS (sense taula ampla) ---------- */
-  .facts{border-top:1px solid var(--line);margin-top:4px}
-  .fact{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px dashed var(--line);
-    font-size:.88rem}
-  .fact:last-child{border-bottom:0}
-  .fact .k{color:var(--muted);flex:1}
-  .fact .v{color:var(--txt);font-weight:700;text-align:right;flex:none;max-width:56%}
-  .fact.tot{border-top:2px solid var(--border);border-bottom:0;margin-top:6px;padding-top:12px;font-size:1rem}
-  .fact.tot .k{color:var(--txt);font-weight:800}
-  .fact.tot .v{color:var(--accent);font-size:1.08rem}
-
-  .badge{display:inline-block;font-size:.68rem;font-weight:800;padding:4px 10px;border-radius:20px;
-    text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;vertical-align:middle}
-  .b-paid{background:rgba(61,220,132,.15);color:var(--good)}
-  .b-pend{background:rgba(251,191,36,.15);color:var(--warn)}
-  .b-info{background:rgba(141,162,192,.15);color:var(--muted)}
-
-  .alert{background:rgba(251,191,36,.10);border:1px solid rgba(251,191,36,.3);border-radius:12px;
-    padding:13px 15px;margin-top:12px;font-size:.86rem;color:var(--warn);line-height:1.5}
-  .alert b{color:var(--txt)}
-  .alert.tip{background:rgba(61,220,132,.08);border-color:rgba(61,220,132,.25);color:#9fe8bf}
-  .alert.tip b{color:var(--txt)}
-
-  footer{border-top:1px solid var(--line);margin-top:10px;padding-top:16px;color:var(--dim);font-size:.78rem;
-    text-align:center;line-height:1.6}
-
-  /* ---------- PANTALLA GRAN ---------- */
-  @media (min-width:760px){
-    body{font-size:16px}
-    .route{grid-template-columns:1fr 1fr;gap:14px}
-    .cards2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .cards2 .card{margin-bottom:0}
-  }
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    background:linear-gradient(180deg,var(--bg),var(--soft));color:var(--txt);min-height:100vh;
+    display:flex;align-items:center;justify-content:center;padding:20px;line-height:1.5}
+  .caixa{background:var(--panel);border:1px solid var(--border);border-radius:var(--rad);
+    padding:28px 24px;max-width:380px;width:100%;text-align:center}
+  h1{font-size:1.2rem;margin-bottom:6px}
+  p{color:var(--muted);font-size:.9rem;margin-bottom:18px}
+  input{width:100%;background:var(--soft);border:1px solid var(--border);color:var(--txt);
+    border-radius:10px;padding:12px;font:inherit;font-size:1rem;text-align:center;margin-bottom:12px}
+  button{width:100%;background:linear-gradient(90deg,var(--accent),#e07a3f);color:#151515;border:0;
+    border-radius:10px;padding:12px;font-weight:700;font-size:1rem;cursor:pointer}
+  .err{color:#ff8a80;font-size:.85rem;margin-top:12px;min-height:1.2em}
+  .peu{color:#5d7294;font-size:.75rem;margin-top:18px}
 </style>
 </head>
 <body>
-<div class="wrap">
-
-  <header class="hero">
-    <div class="kicker">💍 El nostre viatge de noces · 2 persones · cotxe de lloguer</div>
-    <h1>🌿 Andalusia 19–26 octubre</h1>
-    <div class="idt">Sevilla → Grazalema → Ronda → Conil → Tarifa → Puerto de Santa María → Sevilla</div>
-    <div class="countdown" id="cd"></div>
-    <div class="cd-msg" id="cdmsg"></div>
-  </header>
-
-  <!-- ============ VOLS ============ -->
-  <section>
-    <div class="sec-title"><span class="bar"></span>Vols</div>
-
-    <div class="card">
-      <h4>✈️ Anada · dilluns 19 d'octubre <span class="badge b-paid">pagat</span></h4>
-      <div class="facts">
-        <div class="fact"><span class="k">Vol</span><span class="v">VY2210 · Vueling</span></div>
-        <div class="fact"><span class="k">Sortida</span><span class="v">BCN 07:10</span></div>
-        <div class="fact"><span class="k">Arribada</span><span class="v">SVQ 08:55</span></div>
-        <div class="fact"><span class="k">Seients</span><span class="v">Rita 24F · Bernat 24E</span></div>
-      </div>
-      <div class="mini">Cal ser al <b>T1</b> cap a les <b>05:30</b>: el vol surt a les 07:10 i la facturació tanca 40 minuts abans. En arribar a Sevilla, el cotxe es recull a l'aeroport a les 09:00.</div>
-    </div>
-
-    <div class="card">
-      <h4>✈️ Tornada · dilluns 26 d'octubre <span class="badge b-paid">pagat</span></h4>
-      <div class="facts">
-        <div class="fact"><span class="k">Vol</span><span class="v">VY1389 · Vueling</span></div>
-        <div class="fact"><span class="k">Sortida</span><span class="v">SVQ 16:55</span></div>
-        <div class="fact"><span class="k">Arribada</span><span class="v">BCN 18:35</span></div>
-        <div class="fact"><span class="k">Seients</span><span class="v">Rita 22E · Bernat 22F</span></div>
-      </div>
-      <div class="mini">Per agafar-lo, el cotxe s'ha de tornar a l'aeroport de Sevilla a les <b>15:00</b> i s'ha de sortir del Puerto cap a les 12:30–13:00.</div>
-    </div>
-
-    <div class="facts" style="margin-top:14px">
-      <div class="fact"><span class="k">Reserva (localitzador)</span><span class="v">●●●●●●</span></div>
-      <div class="fact"><span class="k">Preu (2 adults, anada i tornada)</span><span class="v">293,96 € <span class="badge b-paid">pagat</span></span></div>
-      <div class="fact"><span class="k">Equipatge</span><span class="v">1 peça de mà per persona (40×30×20)</span></div>
-    </div>
-
-    <a class="btn" href="https://tickets.vueling.com/" target="_blank" rel="noopener">✈️ Gestionar la reserva · Vueling</a>
-    <a class="btn soft" href="https://www.vueling.com/ca" target="_blank" rel="noopener">🌐 Web de Vueling</a>
-
-    <div class="alert">🆕 <b>Check-in:</b> s'obre <b>15 dies abans</b> (a partir del 4 d'octubre) i es fa amb el localitzador <b>●●●●●●</b>. Des d'aquí es trien o es canvien els seients i s'afegeix equipatge si cal.</div>
-  </section>
-
-
-
-  <!-- ============ RUTA ============ -->
-  <section>
-    <div class="sec-title"><span class="bar"></span>Dia a dia</div>
-    <div class="route">
-
-      <div class="day payed">
-        <div class="cap"><div class="num">19</div><h3>Barcelona → Sevilla</h3></div>
-        <span class="km">✈️ 07:10–08:55 · 🚗 15 km</span>
-        <p>Recollir el cotxe a l'aeroport i anar a l'hotel. Tarda per Sevilla: Triana i el Guadalquivir.</p>
-        <ul>
-          <li>A <b>Triana</b>, a les tardes, hi ha locals amb flamenc en directe.</li>
-          <li>Des de <b>Plaza de España</b> surt un carro de cavalls que passeja pel centre.</li>
-        </ul>
-        <div class="tags"><span class="tag">🏨 Sevilla</span><span class="tag plain">pagat</span></div>
-      </div>
-
-      <div class="day payed">
-        <div class="cap"><div class="num">20</div><h3>Sevilla → Grazalema</h3></div>
-        <span class="km">🚗 115 km · ~1h45</span>
-        <p>Matí per Sevilla i cap a la serra. Grazalema és un poble blanc de muntanya, amb gent i vida pròpia.</p>
-        <div class="tags"><span class="tag">🏨 Grazalema</span><span class="tag plain">pagat</span></div>
-      </div>
-
-      <div class="day payed">
-        <div class="cap"><div class="num">21</div><h3>Grazalema i Ronda</h3></div>
-        <span class="km">🚗 28 km cada camí · ~30 min</span>
-        <p>Dia de poble: Grazalema al matí i Ronda a la tarda. Ronda és espectacular de veure des del Tajo, però l'atractiu és el carrer i la seva gent.</p>
-        <div class="tags"><span class="tag">🏨 Grazalema</span><span class="tag plain">pagat</span></div>
-      </div>
-
-      <div class="day payed">
-        <div class="cap"><div class="num">22</div><h3>Grazalema → Conil</h3></div>
-        <span class="km">🚗 138 km · ~2h</span>
-        <p>Baixada de la serra a la costa. Pel camí, pobles blancs: <b>Arcos de la Frontera</b> (penjat sobre el riu) i <b>Vejer de la Frontera</b>, que és dels més bonics d'Andalusia.</p>
-        <div class="tags"><span class="tag">🏨 Conil de la Frontera</span><span class="tag plain">pagat</span></div>
-      </div>
-
-      <div class="day payed">
-        <div class="cap"><div class="num">23</div><h3>Conil → Tarifa → Zahara</h3></div>
-        <span class="km">🚗 Conil–Tarifa 64 km<br>+ Zahara 36 km</span>
-        <p>Dia de costa: <b>Tarifa</b> (el punt més al sud d'Europa, ambient de vent i surf) i <b>Zahara de los Atunes</b>, un poble de pescadors amb platja llarga. Tot és a prop de Conil.</p>
-        <p><b>Millor fer Zahara avui</b> que no pas el dia 22: des de Conil són 36 km, i des de Grazalema serien 171 km.</p>
-        <div class="tags"><span class="tag">🏨 Conil de la Frontera</span><span class="tag plain">pagat</span></div>
-      </div>
-
-      <div class="day">
-        <div class="cap"><div class="num">24</div><h3>Conil → Puerto de Santa María</h3></div>
-        <span class="km">🚗 45 + 20 km · ~1h05</span>
-        <p>Ruta cap al Puerto, amb parada a <b>Cádiz</b>: ciutat vella, mercat i tapes. És la ciutat més antiga d'occident i es recorre a peu.</p>
-        <div class="tags"><span class="tag sorp">🤫 sorpresa</span><span class="tag">🏨 Puerto de Santa María</span></div>
-      </div>
-
-      <div class="day">
-        <div class="cap"><div class="num">25</div><h3>Jerez i Sanlúcar</h3></div>
-        <span class="km">🚗 volta de 64 km · ~1h15</span>
-        <p>Volta des del Puerto: <b>Jerez</b> (bodegues, cavalls cartoixans, flamenc de veritat) i <b>Sanlúcar de Barrameda</b> (desembocadura del Guadalquivir, Doñana davant i el millor marisc de la zona).</p>
-        <p>Ordre recomanat: Puerto → Jerez → Sanlúcar → Puerto.</p>
-        <div class="tags"><span class="tag sorp">🤫 sorpresa</span><span class="tag">🏨 Puerto de Santa María</span></div>
-      </div>
-
-      <div class="day payed">
-        <div class="cap"><div class="num">26</div><h3>Puerto → Sevilla → Barcelona</h3></div>
-        <span class="km">🚗 121 km · ~1h30 · ✈️ 16:55</span>
-        <p>Tornada. Deixar el cotxe a l'aeroport a les <b>15:00</b> i agafar el vol de les 16:55.</p>
-        <p><b>Sortir del Puerto cap a les 12:30–13:00</b>, per anar tranquils i poder dinar abans.</p>
-        <div class="tags"><span class="tag">🏁 fi del viatge</span><span class="tag plain">pagat</span></div>
-      </div>
-
-    </div>
-    <div class="alert tip">🛣️ <b>En total, el viatge són uns 835 km de cotxe.</b> La tarifa del lloguer té <b>quilometratge limitat</b>: compara aquesta xifra amb el contracte abans de sortir. Vegeu «Consells» més avall.</div>
-  </section>
-
-  <!-- ============ ALLOTJAMENTS ============ -->
-  <section>
-    <div class="sec-title"><span class="bar"></span>Allotjaments</div>
-
-    <div class="card">
-      <div class="city">Sevilla · nit del 19</div>
-      <h4>Eurostars Al-Ándalus Palace <span class="badge b-paid">172 € pagat</span></h4>
-      <div class="facts">
-        <div class="fact"><span class="k">Adreça</span><span class="v">Av. de la Palmera, s/n, esq. C/ Paraná · 41012 Sevilla</span></div>
-        <div class="fact"><span class="k">Règim</span><span class="v">Mitja pensió</span></div>
-        <div class="fact"><span class="k">Check-in / out</span><span class="v">15:00 / 12:00</span></div>
-        <div class="fact"><span class="k">Localitzador</span><span class="v">●●●●●●</span></div>
-      </div>
-      <div class="mini">A 4 km del centre, al costat de l'estadi Benito Villamarín. Piscina exterior i aparcament propi (18 €/dia). No reembossable.</div>
-      <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=37.3538508,-5.9800628" target="_blank">🧭 Porta'm-hi (mapa)</a>
-    </div>
-
-    <div class="card">
-      <div class="city">Grazalema · nits del 20 i 21</div>
-      <h4>Fuerte Grazalema <span class="badge b-paid">234,08 € pagat</span></h4>
-      <div class="facts">
-        <div class="fact"><span class="k">Adreça</span><span class="v">Baldío de los Alamillos, Ctra. A-372, km 53 · CP 11610 Grazalema (Càdiz)</span></div>
-        <div class="fact"><span class="k">Règim</span><span class="v">Mitja pensió (buffet)</span></div>
-        <div class="fact"><span class="k">Habitació</span><span class="v">Doble amb vistes a la serra</span></div>
-        <div class="fact"><span class="k">Entrada</span><span class="v">dl. 20 oct, a partir de les 15:00</span></div><div class="fact"><span class="k">Localitzador</span><span class="v">●●●●●●</span></div><div class="fact"><span class="k">Sortida</span><span class="v">dj. 22 oct, fins a les 12:00</span></div>
-      </div>
-      <div class="mini">Està a 5 km del poble de Grazalema, en plena serra. Begudes no incloses. Preu amb el descompte del Club d'Amics ja aplicat (−18,62 €). No reembossable i no modificable.</div>
-      <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=36.757109,-5.347638" target="_blank">🧭 Porta'm-hi (mapa)</a>
-      <a class="btn tel" href="tel:+34956133000">📞 Trucar a l'hotel</a>
-    </div>
-
-    <div class="card">
-      <div class="city">Conil de la Frontera · nits del 22 i 23</div>
-      <h4>FERGUS Conil Park ★★★★ <span class="badge b-pend">306 € a l'hotel</span></h4>
-      <div class="facts">
-        <div class="fact"><span class="k">Adreça</span><span class="v">C. Sta. Teresa de Jesús, s/n · Conil de la Frontera</span></div>
-        <div class="fact"><span class="k">Règim</span><span class="v">Mitja pensió</span></div>
-        <div class="fact"><span class="k">Reserva</span><span class="v">●●●●●●</span></div>
-        <div class="fact"><span class="k">Pagament</span><span class="v">A l'arribada</span></div>
-      </div>
-      <div class="mini">Davant de la platja de La Fontanilla. 360 € − 15 % (LASTGLOW26) = 306 €. <b>Cancel·lació gratuïta</b> i assegurança de viatge inclosa. Es pot triar habitació en línia abans d'arribar.</div>
-      <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=36.2785183,-6.0939913" target="_blank">🧭 Porta'm-hi (mapa)</a>
-      <a class="btn tel" href="tel:+34956043000">📞 Trucar a l'hotel</a>
-    </div>
-
-    <div class="card" style="border-color:#4c3d7a">
-      <div class="city">Puerto de Santa María · nits del 24 i 25</div>
-      <h4>🤫 Encara per reservar <span class="badge b-pend">pendent</span></h4>
-      <div class="mini">Dues nits al Puerto de Santa María. L'allotjament és la sorpresa del viatge i s'ha de reservar.</div>
-    </div>
-  </section>
-
-  <!-- ============ COTXE I PARKING ============ -->
-  <section>
-    <div class="sec-title"><span class="bar"></span>Cotxe i parking</div>
-
-    <div class="card">
-      <div class="city">Lloguer · OK Mobility</div>
-      <h4>Hyundai i10 o similar <span class="badge b-paid">98 € pagat</span></h4>
-      <div class="facts">
-        <div class="fact"><span class="k">Recollida</span><span class="v">dl. 19 oct, 09:00 · Sevilla SVQ</span></div>
-        <div class="fact"><span class="k">Devolució</span><span class="v">dl. 26 oct, 15:00 · Sevilla SVQ</span></div>
-        <div class="fact"><span class="k">Reserva</span><span class="v">●●●●●●</span></div>
-        <div class="fact"><span class="k">Tarifa</span><span class="v">Lite · 8 dies · CDW inclòs</span></div>
-      </div>
-      <div class="mini"><b>Quilometratge limitat</b> — comprovar el límit al contracte.<br><br>
-      <b>En arribar:</b> sortir de la zona d'equipatges i anar a «Rent a car».<br>
-      <b>En tornar:</b> sortida 532 direcció «Llegadas», carril dret «Rent a car», parking P5 (la barrera s'obre sola).</div>
-      <a class="btn tel" href="tel:+34871055312">📞 OK Mobility</a>
-    </div>
-
-    <div class="card">
-      <div class="city">Parking a l'aeroport de Barcelona</div>
-      <h4>🅿️ Parking General T1 <span class="badge b-pend">119 € a la sortida</span></h4>
-      <div class="facts">
-        <div class="fact"><span class="k">Entrada</span><span class="v">dl. 19 oct, 05:00 h</span></div>
-        <div class="fact"><span class="k">Sortida</span><span class="v">dl. 26 oct, 19:00 h</span></div>
-        <div class="fact"><span class="k">Localitzador</span><span class="v">●●●●●●</span></div>
-        <div class="fact"><span class="k">Matrícula</span><span class="v">4872 MDM</span></div>
-        <div class="fact"><span class="k">Preu</span><span class="v">119 € (IVA inclòs)</span></div>
-        <div class="fact"><span class="k">Pagament</span><span class="v">A la sortida · efectiu o targeta</span></div>
-      </div>
-      <div class="mini">Del <b>19 al 26 d'octubre</b> el cotxe particular es queda a Barcelona mentre som fora. Reserva a nom de <b>Bernardo Mora Sanglas</b> (amb el correu de la Rita).<br><br>
-      <b>En entrar:</b> agafa el tiquet a la barrera i comprova que hi surti imprès el localitzador <b>●●●●●●</b>. Si no hi és, en tornar cal passar per l'oficina del pàrquing amb el tiquet i la confirmació.<br>
-      <b>Si no hi ha ningú a la caseta:</b> es valida per telegestió, amb el botó dels caixers automàtics.<br>
-      <b>No canviïs de pàrquing:</b> si aparques en un altre perds la reserva i pagues la tarifa d'aquell pàrquing.</div>
-      <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Parking%20General%20T1%20Aeropuerto%20Barcelona%20El%20Prat" target="_blank">🧭 Porta'm-hi (mapa)</a>
-      <a class="btn soft" href="https://parking.aena.es/reservas/web/gestionarReservas.ac" target="_blank">✏️ Gestionar la reserva</a>
-    </div>
-
-    <div class="alert">⏱️ <b>Compte amb l'hora de sortida del pàrquing.</b> Està reservada a les <b>19:00</b> i el vol arriba a les 18:35: amb equipatges i arribar al cotxe és fàcil passar-se'n. El temps de més es cobra <b>per minuts</b>, amb un màxim de 20 € per dia addicional.</div>
-
-    <div class="alert">📄 <b>Per recollir el cotxe a Sevilla</b> cal portar: DNI o passaport en vigor, permís de conduir i una targeta de crèdit (Visa/MasterCard/Amex) a nom d'un conductor del contracte.</div>
-  </section>
-
-  <!-- ============ PAGAMENTS ============ -->
-  <section>
-    <div class="sec-title"><span class="bar"></span>Què està pagat</div>
-    <div class="facts">
-      <div class="fact"><span class="k">Vols Barcelona ⇄ Sevilla (Vueling)</span><span class="v">293,96 € <span class="badge b-paid">pagat</span></span></div>
-      <div class="fact"><span class="k">Cotxe OK Mobility (8 dies)</span><span class="v">98,00 € <span class="badge b-paid">pagat</span></span></div>
-      <div class="fact"><span class="k">Hotel Sevilla (1 nit)</span><span class="v">172,00 € <span class="badge b-paid">pagat</span></span></div>
-      <div class="fact"><span class="k">Hotel Grazalema (2 nits)</span><span class="v">234,08 € <span class="badge b-paid">pagat</span></span></div>
-      <div class="fact"><span class="k">Hotel Conil (2 nits)</span><span class="v">306,00 € <span class="badge b-pend">a l'hotel</span></span></div>
-      <div class="fact"><span class="k">Hotel Puerto de Santa María (2 nits)</span><span class="v">— <span class="badge b-pend">per reservar</span></span></div>
-      <div class="fact"><span class="k">Parking General T1 a BCN (8 dies)</span><span class="v">119,00 € <span class="badge b-pend">a la sortida</span></span></div>
-      <div class="fact tot"><span class="k">Total del viatge</span><span class="v">1.223,04 €</span></div>
-    </div>
-    <div class="alert tip">💶 <b>Ja pagat: 798,04 €.</b><br>
-    Queden 306 € de l'hotel de Conil, 119 € del pàrquing de BCN (es paguen allà) i l'allotjament del Puerto.<br>
-    A part: gasolina, menjars i begudes fora dels hotels, i el que vulgueu comprar pels pobles.</div>
-  </section>
-
-  <!-- ============ CONSELS ============ -->
-  <section>
-    <div class="sec-title"><span class="bar"></span>Consells per anar-hi amb cotxe</div>
-    <p class="lead">Trets de les distàncies reals de la ruta (calculades sobre carretera).</p>
-
-    <div class="card">
-      <h4>1. El límit de quilòmetres</h4>
-      <div class="mini">La ruta suma <b>uns 835 km</b>. La tarifa Lite d'OK Mobility té <b>quilometratge limitat</b> i el km extra es paga car. Demana el límit exacte i mira si surt a compte ampliar-lo abans de sortir (a l'oficina és més barat que després).</div>
-    </div>
-
-    <div class="card">
-      <h4>2. Zahara de los Atunes, millor el dia 23</h4>
-      <div class="mini">Des de Grazalema (serra) serien <b>171 km</b> fins a la costa; des de Conil, només <b>36 km</b>. Per això Zahara va millor el dia de Tarifa: s'estalvien més de 130 km i es fa en un dia tranquil de costa.</div>
-    </div>
-
-    <div class="card">
-      <h4>3. Els pobles, al matí</h4>
-      <div class="mini">Als pobles blancs (Vejer, Arcos, Grazalema) la vida és al matí: mercat, gent als carrers, bars oberts. A les 14–16h tot plega. A la tarda és millor platja o ciutat gran (Cádiz, Jerez).</div>
-    </div>
-
-    <div class="card">
-      <h4>4. Dinar: a les 14h o res</h4>
-      <div class="mini">Als pobles, la cuina tanca cap a les 15:30–16h i després no hi ha res fins al sopar (20:30–22h). Si baixeu de la serra o feu carretera, mireu on dinareu <b>abans</b> de les 15h.</div>
-    </div>
-
-    <div class="card">
-      <h4>5. La serra és lenta</h4>
-      <div class="mini">Grazalema–Ronda són 28 km però de carretera de muntanya amb corbes: no hi compteu com autopista. Igual la baixada a Conil (138 km, ~2h amb parades). Millor no encadenar dues etapes de serra el mateix dia.</div>
-    </div>
-
-    <div class="card">
-      <h4>6. El dia de tornada</h4>
-      <div class="mini">Del Puerto a l'aeroport de Sevilla hi ha <b>121 km (~1h30)</b>. Amb el cotxe a tornar a les 15:00 i el vol a les 16:55: <b>sortiu a les 12:30–13:00</b> i dineu pel camí. Deixar el cotxe pot trigar si hi ha cua.</div>
-    </div>
-
-    <div class="card">
-      <h4>7. Aparcar als pobles</h4>
-      <div class="mini">Grazalema, Vejer i Arcos tenen els carrers estrets i el centre restringit: aparqueu a les entrades del poble i pugeu a peu. Als hotels de Conil i el Puerto sol haver-hi aparcament propi o zona blava a prop.</div>
-    </div>
-
-    <div class="card">
-      <h4>8. El vent a Tarifa</h4>
-      <div class="mini">Tarifa és el regne del vent (levante/poniente). Si a Conil fa bonança, a Tarifa pot fer un vendaval: val la pena portar una jaqueta talla-vent encara que faci sol.</div>
-    </div>
-
-    <div class="card">
-      <h4>9. Combustible</h4>
-      <div class="mini">Als pobles de la serra i a la costa petita, les benzineres tanquen al migdia i diumenge. Reposteu quan passeu per ciutat (Sevilla, Jerez, Cádiz) i no espereu a quedar al mínim a la muntanya.</div>
-    </div>
-
-    <div class="card">
-      <h4>10. La gent: on es troba</h4>
-      <div class="mini">Per conèixer gent i costums, els millors moments són el <b>mercat del matí</b>, la <b>hora del vermut</b> (12–14h) i les <b>places del poble al vespre</b>. A Jerez, una visita a una bodega amb gent de fora és fàcil i molt autèntica.</div>
-    </div>
-
-    <div class="card">
-      <h4>11. Compte amb el dia 19!</h4>
-      <div class="mini">El vol surt de BCN a les <b>07:10</b>, així que cal ser al T1 cap a les <b>05:30</b> (la facturació tanca 40 min abans). Sortint de Taradell, això vol dir llevar-se a les 4 de la matinada només dos dies després del casament.<br><br>Dues idees per no anar baldat: <b>deixar les malletes fetes el dia 18</b> (i el check-in de Vueling, que ja estarà obert) i, si pot ser, <b>dormir la nit del 18 a prop de Barcelona o de l'aeroport</b>.</div>
-    </div>
-
-    <div class="card">
-      <h4>12. Un sopar de lluna de mel</h4>
-      <div class="mini">A Grazalema i a Conil el sopar va inclòs a l'hotel. En canvi, <b>les dues últimes nits</b> (Puerto de Santa María) encara no tenen hotel ni règim, i és on té més sentit un <b>sopar especial</b>: Jerez i el Puerto tenen molt bona cuina. Si voleu un restaurant concret, val la pena <b>reservar-lo amb dies</b> — a l'octubre s'omplen.</div>
-    </div>
-
-    <div class="card">
-      <h4>13. El dia 20, sense presses</h4>
-      <div class="mini">Sevilla → Grazalema són només <b>1h45</b>. Podeu dinar tranquil·lament a Sevilla i arribar a l'hotel a mitja tarda (el check-in és a les 15:00). No cal matinar ni deixar Sevilla amb el dia a mitges.</div>
-    </div>
-  </section>
-
-  <!-- ============ PENDENT ============ -->
-  <section>
-    <div class="sec-title"><span class="bar"></span>Pendent per al viatge</div>
-    <div class="card">
-      <h4>Reservar l'allotjament del Puerto de Santa María</h4>
-      <div class="mini">2 nits (24 i 25 d'octubre). És la sorpresa del viatge.</div>
-    </div>
-    <div class="card">
-      <h4>Comprovar el límit de km del cotxe</h4>
-      <div class="mini">La ruta són ~835 km. Confirmar el límit de la tarifa Lite i, si cal, ampliar-lo.</div>
-    </div>
-    <div class="card">
-      <h4>Check-in dels vols</h4>
-      <div class="mini">Vueling l'obre <b>15 dies abans</b>. Es fa amb el codi <b>●●●●●●</b>.</div>
-    </div>
-    <div class="card">
-      <h4>🅿️ Portar la reserva del pàrquing desada</h4>
-      <div class="mini">Localitzador <b>●●●●●●</b> (Parking General T1). Apunta'l o porta'l imprès fins a la sortida del pàrquing: al tiquet de la barrera hi ha de sortir aquest número.</div>
-    </div>
-  </section>
-
-  <footer>
-    💍 El nostre viatge de noces · Andalusia 19–26 octubre 2026<br>
-    BernatLab · actualitzat 16/09/2026
-  </footer>
-
+<div class="caixa">
+  <h1>🌿 Viatge Andalusia</h1>
+  <p>19–26 d'octubre de 2026 · pàgina personal</p>
+  <input type="password" id="p" placeholder="Contrasenya" autocomplete="current-password"
+         autofocus enterkeyhint="go">
+  <button id="b">Entrar</button>
+  <div class="err" id="e"></div>
+  <div class="peu">Es recorda en aquest aparell. Si no, la tornes a posar.</div>
 </div>
-
 <script>
-;(function(){
-  var target = new Date(2026, 9, 19, 7, 10, 0); // enlairament dl. 19 oct 07:10
-  function pad(n){ return n < 10 ? '0'+n : ''+n; }
-  function update(){
-    var diff = target - new Date();
-    var cd = document.getElementById('cd');
-    var msg = document.getElementById('cdmsg');
-    if (diff <= 0){
-      cd.innerHTML = '<div class="cd-box" style="grid-column:1/-1"><div class="n">🎉</div><div class="l">En marxa!</div></div>';
-      msg.textContent = 'El viatge ha començat. Bon camí!';
-      return;
-    }
-    var d = Math.floor(diff / 86400000);
-    var h = Math.floor((diff % 86400000) / 3600000);
-    var m = Math.floor((diff % 3600000) / 60000);
-    var s = Math.floor((diff % 60000) / 1000);
-    cd.innerHTML =
-      '<div class="cd-box"><div class="n">'+d+'</div><div class="l">dies</div></div>'+
-      '<div class="cd-box"><div class="n">'+pad(h)+'</div><div class="l">hores</div></div>'+
-      '<div class="cd-box"><div class="n">'+pad(m)+'</div><div class="l">min</div></div>'+
-      '<div class="cd-box"><div class="n">'+pad(s)+'</div><div class="l">seg</div></div>';
-    msg.textContent = 'Falten ' + d + ' dies per agafar el vol.';
+const PAQUET = {"v":1,"iteracions":310000,"sal":"WOpb3my2oIZIJxxxhGA3+w==","iv":"vbDQWja+V5A2Pk1c","dades":"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","etiqueta":"YyrtR6SfGOZ7U+e2WGPYhg=="};
+const clauDesada = "viatge-clau";
+
+function de64(s){ const b = atob(s); const u = new Uint8Array(b.length);
+  for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u; }
+
+async function clauDe(contrasenya){
+  const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(contrasenya),
+                                             "PBKDF2", false, ["deriveKey"]);
+  return crypto.subtle.deriveKey({name:"PBKDF2", salt: de64(PAQUET.sal),
+                                  iterations: PAQUET.iteracions, hash:"SHA-256"},
+                                 base, {name:"AES-GCM", length:256}, false, ["decrypt"]);
+}
+
+async function obre(contrasenya){
+  const clau = await clauDe(contrasenya);
+  const pla = await crypto.subtle.decrypt({name:"AES-GCM", iv: de64(PAQUET.iv),
+                                            tagLength:128},
+                                           clau, (() => { const d = de64(PAQUET.dades);
+                                             const t = de64(PAQUET.etiqueta);
+                                             const j = new Uint8Array(d.length + t.length);
+                                             j.set(d); j.set(t, d.length); return j; })());
+  return new TextDecoder().decode(pla);
+}
+
+async function prova(contrasenya, desar){
+  try {
+    const html = await obre(contrasenya);
+    if (desar) { try { localStorage.setItem(clauDesada, contrasenya); } catch(e){} }
+    document.open(); document.write(html); document.close();
+  } catch (e) {
+    document.getElementById("e").textContent = "Contrasenya incorrecta.";
+    try { localStorage.removeItem(clauDesada); } catch(e){}
   }
-  update();
-  setInterval(update, 1000);
-})();
+}
+
+document.getElementById("b").onclick = () =>
+  prova(document.getElementById("p").value, true);
+document.getElementById("p").addEventListener("keydown", ev => {
+  if (ev.key === "Enter") prova(document.getElementById("p").value, true);
+});
+try {
+  const desada = localStorage.getItem(clauDesada);
+  if (desada) prova(desada, false);
+} catch(e){}
 </script>
 </body>
 </html>

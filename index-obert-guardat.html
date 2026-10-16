@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<!-- tret el 16/10: aquesta línia fa que iOS obri la pàgina en mode aplicació, i en aquest
+         mode una adreça http amb port no estàndard falla. Sense la línia, la drecera de la
+         pantalla d inici obre la pàgina com una pestanya normal i funciona. -->
+<title>Viatge Andalusia · 19–26 octubre 2026</title>
+<style>
+  :root{
+    --bg:#0b1220; --bgsoft:#0f1a30; --panel:#131f38; --panel2:#16233f;
+    --border:#24344f; --line:#1c2b46;
+    --txt:#eaf0f9; --muted:#8da2c0; --dim:#5d7294;
+    --accent:#f5b942; --accent2:#e07a3f; --good:#3ddc84; --warn:#fbbf24; --bad:#f87171;
+    --rad:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:
+      radial-gradient(700px 400px at 85% -10%, rgba(245,185,66,.10), transparent 60%),
+      radial-gradient(600px 350px at 0% 105%, rgba(224,122,63,.07), transparent 60%),
+      linear-gradient(180deg,var(--bg) 0%,var(--bgsoft) 100%);
+    color:var(--txt); line-height:1.5; min-height:100vh;
+    padding:16px 14px 70px; font-size:17px;
+  }
+  .wrap{max-width:720px;margin:0 auto}
+
+  /* ---------- CAPÇALERA ---------- */
+  header.hero{
+    background:linear-gradient(135deg,rgba(245,185,66,.16),rgba(224,122,63,.10) 60%,rgba(61,220,132,.08));
+    border:1px solid var(--border); border-radius:20px;
+    padding:22px 20px; margin-bottom:18px;
+  }
+  .kicker{font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+  header.hero h1{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+  header.hero .idt{color:var(--muted);margin-top:8px;font-size:.9rem}
+  .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
+  .cd-box{background:rgba(10,20,40,.55);border:1px solid var(--line);border-radius:12px;padding:10px 4px;text-align:center}
+  .cd-box .n{font-size:1.5rem;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1}
+  .cd-box .l{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:5px}
+  .cd-msg{margin-top:12px;font-size:.85rem;color:var(--good);font-weight:700}
+
+  /* ---------- SECCIONS ---------- */
+  section{background:var(--panel);border:1px solid var(--border);border-radius:var(--rad);
+    padding:20px 18px;margin-bottom:16px}
+  .sec-title{display:flex;align-items:center;gap:9px;font-size:1rem;font-weight:800;margin-bottom:14px}
+  .sec-title .bar{width:5px;height:19px;border-radius:3px;background:linear-gradient(180deg,var(--accent),var(--accent2));flex:none}
+  .lead{color:var(--muted);font-size:.88rem;margin-bottom:12px}
+
+  /* ---------- DIES: mobil primer ---------- */
+  .route{display:grid;gap:12px}
+  .day{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:15px 16px}
+  .day.payed{border-left:4px solid var(--good)}
+  .day .cap{display:flex;align-items:baseline;gap:11px;margin-bottom:6px}
+  .day .num{font-size:1.5rem;font-weight:800;color:var(--accent);line-height:1;flex:none}
+  .day h3{font-size:1.05rem;font-weight:800;line-height:1.25}
+  .day .km{display:inline-block;font-size:.8rem;font-weight:700;color:var(--accent2);margin-bottom:7px}
+  .day p{color:var(--muted);font-size:.9rem;margin-bottom:5px}
+  .day ul{margin:6px 0 0 20px;color:var(--muted);font-size:.88rem}
+  .day li{margin-bottom:3px}
+  .day li b{color:var(--txt)}
+  .tags{margin-top:9px;display:flex;flex-wrap:wrap;gap:6px}
+  .tag{display:inline-block;font-size:.72rem;font-weight:700;padding:5px 11px;border-radius:20px;
+    background:rgba(61,220,132,.12);color:var(--good)}
+  .tag.hot{background:rgba(251,191,36,.14);color:var(--warn)}
+  .tag.sorp{background:rgba(167,139,250,.16);color:#c4b5fd}
+  .tag.plain{background:rgba(141,162,192,.13);color:var(--muted)}
+
+  /* ---------- BOTONS (grans, per al dit) ---------- */
+  .btn{display:block;text-align:center;text-decoration:none;font-weight:800;font-size:.92rem;
+    padding:13px 14px;border-radius:12px;margin-top:10px;border:1px solid var(--border);
+    background:rgba(245,185,66,.12);color:var(--accent)}
+  .btn:active{transform:scale(.985)}
+  .btn.tel{background:rgba(61,220,132,.12);color:var(--good)}
+  .btn.soft{background:rgba(141,162,192,.10);color:var(--muted)}
+
+  /* ---------- TARGETES ---------- */
+  .card{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px}
+  .card:last-child{margin-bottom:0}
+  .card .city{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--accent);margin-bottom:5px}
+  .card h4{font-size:1.05rem;font-weight:800;margin-bottom:9px;line-height:1.3}
+  .card .addr{color:var(--muted);font-size:.86rem;line-height:1.5;margin-bottom:4px}
+  .card .mini{color:var(--dim);font-size:.8rem;margin-top:8px;line-height:1.45}
+
+  /* ---------- LLISTA DE FETS (sense taula ampla) ---------- */
+  .facts{border-top:1px solid var(--line);margin-top:4px}
+  .fact{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px dashed var(--line);
+    font-size:.88rem}
+  .fact:last-child{border-bottom:0}
+  .fact .k{color:var(--muted);flex:1}
+  .fact .v{color:var(--txt);font-weight:700;text-align:right;flex:none;max-width:56%}
+  .fact.tot{border-top:2px solid var(--border);border-bottom:0;margin-top:6px;padding-top:12px;font-size:1rem}
+  .fact.tot .k{color:var(--txt);font-weight:800}
+  .fact.tot .v{color:var(--accent);font-size:1.08rem}
+
+  .badge{display:inline-block;font-size:.68rem;font-weight:800;padding:4px 10px;border-radius:20px;
+    text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;vertical-align:middle}
+  .b-paid{background:rgba(61,220,132,.15);color:var(--good)}
+  .b-pend{background:rgba(251,191,36,.15);color:var(--warn)}
+  .b-info{background:rgba(141,162,192,.15);color:var(--muted)}
+
+  .alert{background:rgba(251,191,36,.10);border:1px solid rgba(251,191,36,.3);border-radius:12px;
+    padding:13px 15px;margin-top:12px;font-size:.86rem;color:var(--warn);line-height:1.5}
+  .alert b{color:var(--txt)}
+  .alert.tip{background:rgba(61,220,132,.08);border-color:rgba(61,220,132,.25);color:#9fe8bf}
+  .alert.tip b{color:var(--txt)}
+
+  footer{border-top:1px solid var(--line);margin-top:10px;padding-top:16px;color:var(--dim);font-size:.78rem;
+    text-align:center;line-height:1.6}
+
+  /* ---------- PANTALLA GRAN ---------- */
+  @media (min-width:760px){
+    body{font-size:16px}
+    .route{grid-template-columns:1fr 1fr;gap:14px}
+    .cards2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .cards2 .card{margin-bottom:0}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker">💍 El nostre viatge de noces · 2 persones · cotxe de lloguer</div>
+    <h1>🌿 Andalusia 19–26 octubre</h1>
+    <div class="idt">Sevilla → Grazalema → Ronda → Conil → Tarifa → Puerto de Santa María → Sevilla</div>
+    <div class="countdown" id="cd"></div>
+    <div class="cd-msg" id="cdmsg"></div>
+  </header>
+
+  <!-- ============ VOLS ============ -->
+  <section>
+    <div class="sec-title"><span class="bar"></span>Vols</div>
+
+    <div class="card">
+      <h4>✈️ Anada · dilluns 19 d'octubre <span class="badge b-paid">pagat</span></h4>
+      <div class="facts">
+        <div class="fact"><span class="k">Vol</span><span class="v">VY2210 · Vueling</span></div>
+        <div class="fact"><span class="k">Sortida</span><span class="v">BCN 07:10</span></div>
+        <div class="fact"><span class="k">Arribada</span><span class="v">SVQ 08:55</span></div>
+        <div class="fact"><span class="k">Seients</span><span class="v">Rita 24F · Bernat 24E</span></div>
+      </div>
+      <div class="mini">Cal ser al <b>T1</b> cap a les <b>05:30</b>: el vol surt a les 07:10 i la facturació tanca 40 minuts abans. En arribar a Sevilla, el cotxe es recull a l'aeroport a les 09:00.</div>
+    </div>
+
+    <div class="card">
+      <h4>✈️ Tornada · dilluns 26 d'octubre <span class="badge b-paid">pagat</span></h4>
+      <div class="facts">
+        <div class="fact"><span class="k">Vol</span><span class="v">VY1389 · Vueling</span></div>
+        <div class="fact"><span class="k">Sortida</span><span class="v">SVQ 16:55</span></div>
+        <div class="fact"><span class="k">Arribada</span><span class="v">BCN 18:35</span></div>
+        <div class="fact"><span class="k">Seients</span><span class="v">Rita 22E · Bernat 22F</span></div>
+      </div>
+      <div class="mini">Per agafar-lo, el cotxe s'ha de tornar a l'aeroport de Sevilla a les <b>15:00</b> i s'ha de sortir del Puerto cap a les 12:30–13:00.</div>
+    </div>
+
+    <div class="facts" style="margin-top:14px">
+      <div class="fact"><span class="k">Reserva (localitzador)</span><span class="v">●●●●●●</span></div>
+      <div class="fact"><span class="k">Preu (2 adults, anada i tornada)</span><span class="v">293,96 € <span class="badge b-paid">pagat</span></span></div>
+      <div class="fact"><span class="k">Equipatge</span><span class="v">1 peça de mà per persona (40×30×20)</span></div>
+    </div>
+
+    <a class="btn" href="https://tickets.vueling.com/" target="_blank" rel="noopener">✈️ Gestionar la reserva · Vueling</a>
+    <a class="btn soft" href="https://www.vueling.com/ca" target="_blank" rel="noopener">🌐 Web de Vueling</a>
+
+    <div class="alert">🆕 <b>Check-in:</b> s'obre <b>15 dies abans</b> (a partir del 4 d'octubre) i es fa amb el localitzador <b>●●●●●●</b>. Des d'aquí es trien o es canvien els seients i s'afegeix equipatge si cal.</div>
+  </section>
+
+
+
+  <!-- ============ RUTA ============ -->
+  <section>
+    <div class="sec-title"><span class="bar"></span>Dia a dia</div>
+    <div class="route">
+
+      <div class="day payed">
+        <div class="cap"><div class="num">19</div><h3>Barcelona → Sevilla</h3></div>
+        <span class="km">✈️ 07:10–08:55 · 🚗 15 km</span>
+        <p>Recollir el cotxe a l'aeroport i anar a l'hotel. Tarda per Sevilla: Triana i el Guadalquivir.</p>
+        <ul>
+          <li>A <b>Triana</b>, a les tardes, hi ha locals amb flamenc en directe.</li>
+          <li>Des de <b>Plaza de España</b> surt un carro de cavalls que passeja pel centre.</li>
+        </ul>
+        <div class="tags"><span class="tag">🏨 Sevilla</span><span class="tag plain">pagat</span></div>
+      </div>
+
+      <div class="day payed">
+        <div class="cap"><div class="num">20</div><h3>Sevilla → Grazalema</h3></div>
+        <span class="km">🚗 115 km · ~1h45</span>
+        <p>Matí per Sevilla i cap a la serra. Grazalema és un poble blanc de muntanya, amb gent i vida pròpia.</p>
+        <div class="tags"><span class="tag">🏨 Grazalema</span><span class="tag plain">pagat</span></div>
+      </div>
+
+      <div class="day payed">
+        <div class="cap"><div class="num">21</div><h3>Grazalema i Ronda</h3></div>
+        <span class="km">🚗 28 km cada camí · ~30 min</span>
+        <p>Dia de poble: Grazalema al matí i Ronda a la tarda. Ronda és espectacular de veure des del Tajo, però l'atractiu és el carrer i la seva gent.</p>
+        <div class="tags"><span class="tag">🏨 Grazalema</span><span class="tag plain">pagat</span></div>
+      </div>
+
+      <div class="day payed">
+        <div class="cap"><div class="num">22</div><h3>Grazalema → Conil</h3></div>
+        <span class="km">🚗 138 km · ~2h</span>
+        <p>Baixada de la serra a la costa. Pel camí, pobles blancs: <b>Arcos de la Frontera</b> (penjat sobre el riu) i <b>Vejer de la Frontera</b>, que és dels més bonics d'Andalusia.</p>
+        <div class="tags"><span class="tag">🏨 Conil de la Frontera</span><span class="tag plain">pagat</span></div>
+      </div>
+
+      <div class="day payed">
+        <div class="cap"><div class="num">23</div><h3>Conil → Tarifa → Zahara</h3></div>
+        <span class="km">🚗 Conil–Tarifa 64 km<br>+ Zahara 36 km</span>
+        <p>Dia de costa: <b>Tarifa</b> (el punt més al sud d'Europa, ambient de vent i surf) i <b>Zahara de los Atunes</b>, un poble de pescadors amb platja llarga. Tot és a prop de Conil.</p>
+        <p><b>Millor fer Zahara avui</b> que no pas el dia 22: des de Conil són 36 km, i des de Grazalema serien 171 km.</p>
+        <div class="tags"><span class="tag">🏨 Conil de la Frontera</span><span class="tag plain">pagat</span></div>
+      </div>
+
+      <div class="day">
+        <div class="cap"><div class="num">24</div><h3>Conil → Puerto de Santa María</h3></div>
+        <span class="km">🚗 45 + 20 km · ~1h05</span>
+        <p>Ruta cap al Puerto, amb parada a <b>Cádiz</b>: ciutat vella, mercat i tapes. És la ciutat més antiga d'occident i es recorre a peu.</p>
+        <div class="tags"><span class="tag sorp">🤫 sorpresa</span><span class="tag">🏨 Puerto de Santa María</span></div>
+      </div>
+
+      <div class="day">
+        <div class="cap"><div class="num">25</div><h3>Jerez i Sanlúcar</h3></div>
+        <span class="km">🚗 volta de 64 km · ~1h15</span>
+        <p>Volta des del Puerto: <b>Jerez</b> (bodegues, cavalls cartoixans, flamenc de veritat) i <b>Sanlúcar de Barrameda</b> (desembocadura del Guadalquivir, Doñana davant i el millor marisc de la zona).</p>
+        <p>Ordre recomanat: Puerto → Jerez → Sanlúcar → Puerto.</p>
+        <div class="tags"><span class="tag sorp">🤫 sorpresa</span><span class="tag">🏨 Puerto de Santa María</span></div>
+      </div>
+
+      <div class="day payed">
+        <div class="cap"><div class="num">26</div><h3>Puerto → Sevilla → Barcelona</h3></div>
+        <span class="km">🚗 121 km · ~1h30 · ✈️ 16:55</span>
+        <p>Tornada. Deixar el cotxe a l'aeroport a les <b>15:00</b> i agafar el vol de les 16:55.</p>
+        <p><b>Sortir del Puerto cap a les 12:30–13:00</b>, per anar tranquils i poder dinar abans.</p>
+        <div class="tags"><span class="tag">🏁 fi del viatge</span><span class="tag plain">pagat</span></div>
+      </div>
+
+    </div>
+    <div class="alert tip">🛣️ <b>En total, el viatge són uns 835 km de cotxe.</b> La tarifa del lloguer té <b>quilometratge limitat</b>: compara aquesta xifra amb el contracte abans de sortir. Vegeu «Consells» més avall.</div>
+  </section>
+
+  <!-- ============ ALLOTJAMENTS ============ -->
+  <section>
+    <div class="sec-title"><span class="bar"></span>Allotjaments</div>
+
+    <div class="card">
+      <div class="city">Sevilla · nit del 19</div>
+      <h4>Eurostars Al-Ándalus Palace <span class="badge b-paid">172 € pagat</span></h4>
+      <div class="facts">
+        <div class="fact"><span class="k">Adreça</span><span class="v">Av. de la Palmera, s/n, esq. C/ Paraná · 41012 Sevilla</span></div>
+        <div class="fact"><span class="k">Règim</span><span class="v">Mitja pensió</span></div>
+        <div class="fact"><span class="k">Check-in / out</span><span class="v">15:00 / 12:00</span></div>
+        <div class="fact"><span class="k">Localitzador</span><span class="v">●●●●●●</span></div>
+      </div>
+      <div class="mini">A 4 km del centre, al costat de l'estadi Benito Villamarín. Piscina exterior i aparcament propi (18 €/dia). No reembossable.</div>
+      <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=37.3538508,-5.9800628" target="_blank">🧭 Porta'm-hi (mapa)</a>
+    </div>
+
+    <div class="card">
+      <div class="city">Grazalema · nits del 20 i 21</div>
+      <h4>Fuerte Grazalema <span class="badge b-paid">234,08 € pagat</span></h4>
+      <div class="facts">
+        <div class="fact"><span class="k">Adreça</span><span class="v">Baldío de los Alamillos, Ctra. A-372, km 53 · CP 11610 Grazalema (Càdiz)</span></div>
+        <div class="fact"><span class="k">Règim</span><span class="v">Mitja pensió (buffet)</span></div>
+        <div class="fact"><span class="k">Habitació</span><span class="v">Doble amb vistes a la serra</span></div>
+        <div class="fact"><span class="k">Entrada</span><span class="v">dl. 20 oct, a partir de les 15:00</span></div><div class="fact"><span class="k">Localitzador</span><span class="v">●●●●●●</span></div><div class="fact"><span class="k">Sortida</span><span class="v">dj. 22 oct, fins a les 12:00</span></div>
+      </div>
+      <div class="mini">Està a 5 km del poble de Grazalema, en plena serra. Begudes no incloses. Preu amb el descompte del Club d'Amics ja aplicat (−18,62 €). No reembossable i no modificable.</div>
+      <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=36.757109,-5.347638" target="_blank">🧭 Porta'm-hi (mapa)</a>
+      <a class="btn tel" href="tel:+34956133000">📞 Trucar a l'hotel</a>
+    </div>
+
+    <div class="card">
+      <div class="city">Conil de la Frontera · nits del 22 i 23</div>
+      <h4>FERGUS Conil Park ★★★★ <span class="badge b-pend">306 € a l'hotel</span></h4>
+      <div class="facts">
+        <div class="fact"><span class="k">Adreça</span><span class="v">C. Sta. Teresa de Jesús, s/n · Conil de la Frontera</span></div>
+        <div class="fact"><span class="k">Règim</span><span class="v">Mitja pensió</span></div>
+        <div class="fact"><span class="k">Reserva</span><span class="v">●●●●●●</span></div>
+        <div class="fact"><span class="k">Pagament</span><span class="v">A l'arribada</span></div>
+      </div>
+      <div class="mini">Davant de la platja de La Fontanilla. 360 € − 15 % (LASTGLOW26) = 306 €. <b>Cancel·lació gratuïta</b> i assegurança de viatge inclosa. Es pot triar habitació en línia abans d'arribar.</div>
+      <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=36.2785183,-6.0939913" target="_blank">🧭 Porta'm-hi (mapa)</a>
+      <a class="btn tel" href="tel:+34956043000">📞 Trucar a l'hotel</a>
+    </div>
+
+    <div class="card" style="border-color:#4c3d7a">
+      <div class="city">Puerto de Santa María · nits del 24 i 25</div>
+      <h4>🤫 Encara per reservar <span class="badge b-pend">pendent</span></h4>
+      <div class="mini">Dues nits al Puerto de Santa María. L'allotjament és la sorpresa del viatge i s'ha de reservar.</div>
+    </div>
+  </section>
+
+  <!-- ============ COTXE I PARKING ============ -->
+  <section>
+    <div class="sec-title"><span class="bar"></span>Cotxe i parking</div>
+
+    <div class="card">
+      <div class="city">Lloguer · OK Mobility</div>
+      <h4>Hyundai i10 o similar <span class="badge b-paid">98 € pagat</span></h4>
+      <div class="facts">
+        <div class="fact"><span class="k">Recollida</span><span class="v">dl. 19 oct, 09:00 · Sevilla SVQ</span></div>
+        <div class="fact"><span class="k">Devolució</span><span class="v">dl. 26 oct, 15:00 · Sevilla SVQ</span></div>
+        <div class="fact"><span class="k">Reserva</span><span class="v">●●●●●●</span></div>
+        <div class="fact"><span class="k">Tarifa</span><span class="v">Lite · 8 dies · CDW inclòs</span></div>
+      </div>
+      <div class="mini"><b>Quilometratge limitat</b> — comprovar el límit al contracte.<br><br>
+      <b>En arribar:</b> sortir de la zona d'equipatges i anar a «Rent a car».<br>
+      <b>En tornar:</b> sortida 532 direcció «Llegadas», carril dret «Rent a car», parking P5 (la barrera s'obre sola).</div>
+      <a class="btn tel" href="tel:+34871055312">📞 OK Mobility</a>
+    </div>
+
+    <div class="card">
+      <div class="city">Parking a l'aeroport de Barcelona</div>
+      <h4>🅿️ Parking General T1 <span class="badge b-pend">119 € a la sortida</span></h4>
+      <div class="facts">
+        <div class="fact"><span class="k">Entrada</span><span class="v">dl. 19 oct, 05:00 h</span></div>
+        <div class="fact"><span class="k">Sortida</span><span class="v">dl. 26 oct, 19:00 h</span></div>
+        <div class="fact"><span class="k">Localitzador</span><span class="v">●●●●●●</span></div>
+        <div class="fact"><span class="k">Matrícula</span><span class="v">4872 MDM</span></div>
+        <div class="fact"><span class="k">Preu</span><span class="v">119 € (IVA inclòs)</span></div>
+        <div class="fact"><span class="k">Pagament</span><span class="v">A la sortida · efectiu o targeta</span></div>
+      </div>
+      <div class="mini">Del <b>19 al 26 d'octubre</b> el cotxe particular es queda a Barcelona mentre som fora. Reserva a nom de <b>Bernardo Mora Sanglas</b> (amb el correu de la Rita).<br><br>
+      <b>En entrar:</b> agafa el tiquet a la barrera i comprova que hi surti imprès el localitzador <b>●●●●●●</b>. Si no hi és, en tornar cal passar per l'oficina del pàrquing amb el tiquet i la confirmació.<br>
+      <b>Si no hi ha ningú a la caseta:</b> es valida per telegestió, amb el botó dels caixers automàtics.<br>
+      <b>No canviïs de pàrquing:</b> si aparques en un altre perds la reserva i pagues la tarifa d'aquell pàrquing.</div>
+      <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Parking%20General%20T1%20Aeropuerto%20Barcelona%20El%20Prat" target="_blank">🧭 Porta'm-hi (mapa)</a>
+      <a class="btn soft" href="https://parking.aena.es/reservas/web/gestionarReservas.ac" target="_blank">✏️ Gestionar la reserva</a>
+    </div>
+
+    <div class="alert">⏱️ <b>Compte amb l'hora de sortida del pàrquing.</b> Està reservada a les <b>19:00</b> i el vol arriba a les 18:35: amb equipatges i arribar al cotxe és fàcil passar-se'n. El temps de més es cobra <b>per minuts</b>, amb un màxim de 20 € per dia addicional.</div>
+
+    <div class="alert">📄 <b>Per recollir el cotxe a Sevilla</b> cal portar: DNI o passaport en vigor, permís de conduir i una targeta de crèdit (Visa/MasterCard/Amex) a nom d'un conductor del contracte.</div>
+  </section>
+
+  <!-- ============ PAGAMENTS ============ -->
+  <section>
+    <div class="sec-title"><span class="bar"></span>Què està pagat</div>
+    <div class="facts">
+      <div class="fact"><span class="k">Vols Barcelona ⇄ Sevilla (Vueling)</span><span class="v">293,96 € <span class="badge b-paid">pagat</span></span></div>
+      <div class="fact"><span class="k">Cotxe OK Mobility (8 dies)</span><span class="v">98,00 € <span class="badge b-paid">pagat</span></span></div>
+      <div class="fact"><span class="k">Hotel Sevilla (1 nit)</span><span class="v">172,00 € <span class="badge b-paid">pagat</span></span></div>
+      <div class="fact"><span class="k">Hotel Grazalema (2 nits)</span><span class="v">234,08 € <span class="badge b-paid">pagat</span></span></div>
+      <div class="fact"><span class="k">Hotel Conil (2 nits)</span><span class="v">306,00 € <span class="badge b-pend">a l'hotel</span></span></div>
+      <div class="fact"><span class="k">Hotel Puerto de Santa María (2 nits)</span><span class="v">— <span class="badge b-pend">per reservar</span></span></div>
+      <div class="fact"><span class="k">Parking General T1 a BCN (8 dies)</span><span class="v">119,00 € <span class="badge b-pend">a la sortida</span></span></div>
+      <div class="fact tot"><span class="k">Total del viatge</span><span class="v">1.223,04 €</span></div>
+    </div>
+    <div class="alert tip">💶 <b>Ja pagat: 798,04 €.</b><br>
+    Queden 306 € de l'hotel de Conil, 119 € del pàrquing de BCN (es paguen allà) i l'allotjament del Puerto.<br>
+    A part: gasolina, menjars i begudes fora dels hotels, i el que vulgueu comprar pels pobles.</div>
+  </section>
+
+  <!-- ============ CONSELS ============ -->
+  <section>
+    <div class="sec-title"><span class="bar"></span>Consells per anar-hi amb cotxe</div>
+    <p class="lead">Trets de les distàncies reals de la ruta (calculades sobre carretera).</p>
+
+    <div class="card">
+      <h4>1. El límit de quilòmetres</h4>
+      <div class="mini">La ruta suma <b>uns 835 km</b>. La tarifa Lite d'OK Mobility té <b>quilometratge limitat</b> i el km extra es paga car. Demana el límit exacte i mira si surt a compte ampliar-lo abans de sortir (a l'oficina és més barat que després).</div>
+    </div>
+
+    <div class="card">
+      <h4>2. Zahara de los Atunes, millor el dia 23</h4>
+      <div class="mini">Des de Grazalema (serra) serien <b>171 km</b> fins a la costa; des de Conil, només <b>36 km</b>. Per això Zahara va millor el dia de Tarifa: s'estalvien més de 130 km i es fa en un dia tranquil de costa.</div>
+    </div>
+
+    <div class="card">
+      <h4>3. Els pobles, al matí</h4>
+      <div class="mini">Als pobles blancs (Vejer, Arcos, Grazalema) la vida és al matí: mercat, gent als carrers, bars oberts. A les 14–16h tot plega. A la tarda és millor platja o ciutat gran (Cádiz, Jerez).</div>
+    </div>
+
+    <div class="card">
+      <h4>4. Dinar: a les 14h o res</h4>
+      <div class="mini">Als pobles, la cuina tanca cap a les 15:30–16h i després no hi ha res fins al sopar (20:30–22h). Si baixeu de la serra o feu carretera, mireu on dinareu <b>abans</b> de les 15h.</div>
+    </div>
+
+    <div class="card">
+      <h4>5. La serra és lenta</h4>
+      <div class="mini">Grazalema–Ronda són 28 km però de carretera de muntanya amb corbes: no hi compteu com autopista. Igual la baixada a Conil (138 km, ~2h amb parades). Millor no encadenar dues etapes de serra el mateix dia.</div>
+    </div>
+
+    <div class="card">
+      <h4>6. El dia de tornada</h4>
+      <div class="mini">Del Puerto a l'aeroport de Sevilla hi ha <b>121 km (~1h30)</b>. Amb el cotxe a tornar a les 15:00 i el vol a les 16:55: <b>sortiu a les 12:30–13:00</b> i dineu pel camí. Deixar el cotxe pot trigar si hi ha cua.</div>
+    </div>
+
+    <div class="card">
+      <h4>7. Aparcar als pobles</h4>
+      <div class="mini">Grazalema, Vejer i Arcos tenen els carrers estrets i el centre restringit: aparqueu a les entrades del poble i pugeu a peu. Als hotels de Conil i el Puerto sol haver-hi aparcament propi o zona blava a prop.</div>
+    </div>
+
+    <div class="card">
+      <h4>8. El vent a Tarifa</h4>
+      <div class="mini">Tarifa és el regne del vent (levante/poniente). Si a Conil fa bonança, a Tarifa pot fer un vendaval: val la pena portar una jaqueta talla-vent encara que faci sol.</div>
+    </div>
+
+    <div class="card">
+      <h4>9. Combustible</h4>
+      <div class="mini">Als pobles de la serra i a la costa petita, les benzineres tanquen al migdia i diumenge. Reposteu quan passeu per ciutat (Sevilla, Jerez, Cádiz) i no espereu a quedar al mínim a la muntanya.</div>
+    </div>
+
+    <div class="card">
+      <h4>10. La gent: on es troba</h4>
+      <div class="mini">Per conèixer gent i costums, els millors moments són el <b>mercat del matí</b>, la <b>hora del vermut</b> (12–14h) i les <b>places del poble al vespre</b>. A Jerez, una visita a una bodega amb gent de fora és fàcil i molt autèntica.</div>
+    </div>
+
+    <div class="card">
+      <h4>11. Compte amb el dia 19!</h4>
+      <div class="mini">El vol surt de BCN a les <b>07:10</b>, així que cal ser al T1 cap a les <b>05:30</b> (la facturació tanca 40 min abans). Sortint de Taradell, això vol dir llevar-se a les 4 de la matinada només dos dies després del casament.<br><br>Dues idees per no anar baldat: <b>deixar les malletes fetes el dia 18</b> (i el check-in de Vueling, que ja estarà obert) i, si pot ser, <b>dormir la nit del 18 a prop de Barcelona o de l'aeroport</b>.</div>
+    </div>
+
+    <div class="card">
+      <h4>12. Un sopar de lluna de mel</h4>
+      <div class="mini">A Grazalema i a Conil el sopar va inclòs a l'hotel. En canvi, <b>les dues últimes nits</b> (Puerto de Santa María) encara no tenen hotel ni règim, i és on té més sentit un <b>sopar especial</b>: Jerez i el Puerto tenen molt bona cuina. Si voleu un restaurant concret, val la pena <b>reservar-lo amb dies</b> — a l'octubre s'omplen.</div>
+    </div>
+
+    <div class="card">
+      <h4>13. El dia 20, sense presses</h4>
+      <div class="mini">Sevilla → Grazalema són només <b>1h45</b>. Podeu dinar tranquil·lament a Sevilla i arribar a l'hotel a mitja tarda (el check-in és a les 15:00). No cal matinar ni deixar Sevilla amb el dia a mitges.</div>
+    </div>
+  </section>
+
+  <!-- ============ PENDENT ============ -->
+  <section>
+    <div class="sec-title"><span class="bar"></span>Pendent per al viatge</div>
+    <div class="card">
+      <h4>Reservar l'allotjament del Puerto de Santa María</h4>
+      <div class="mini">2 nits (24 i 25 d'octubre). És la sorpresa del viatge.</div>
+    </div>
+    <div class="card">
+      <h4>Comprovar el límit de km del cotxe</h4>
+      <div class="mini">La ruta són ~835 km. Confirmar el límit de la tarifa Lite i, si cal, ampliar-lo.</div>
+    </div>
+    <div class="card">
+      <h4>Check-in dels vols</h4>
+      <div class="mini">Vueling l'obre <b>15 dies abans</b>. Es fa amb el codi <b>●●●●●●</b>.</div>
+    </div>
+    <div class="card">
+      <h4>🅿️ Portar la reserva del pàrquing desada</h4>
+      <div class="mini">Localitzador <b>●●●●●●</b> (Parking General T1). Apunta'l o porta'l imprès fins a la sortida del pàrquing: al tiquet de la barrera hi ha de sortir aquest número.</div>
+    </div>
+  </section>
+
+  <footer>
+    💍 El nostre viatge de noces · Andalusia 19–26 octubre 2026<br>
+    BernatLab · actualitzat 16/09/2026
+  </footer>
+
+</div>
+
+<script>
+;(function(){
+  var target = new Date(2026, 9, 19, 7, 10, 0); // enlairament dl. 19 oct 07:10
+  function pad(n){ return n < 10 ? '0'+n : ''+n; }
+  function update(){
+    var diff = target - new Date();
+    var cd = document.getElementById('cd');
+    var msg = document.getElementById('cdmsg');
+    if (diff <= 0){
+      cd.innerHTML = '<div class="cd-box" style="grid-column:1/-1"><div class="n">🎉</div><div class="l">En marxa!</div></div>';
+      msg.textContent = 'El viatge ha començat. Bon camí!';
+      return;
+    }
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor((diff % 86400000) / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+    cd.innerHTML =
+      '<div class="cd-box"><div class="n">'+d+'</div><div class="l">dies</div></div>'+
+      '<div class="cd-box"><div class="n">'+pad(h)+'</div><div class="l">hores</div></div>'+
+      '<div class="cd-box"><div class="n">'+pad(m)+'</div><div class="l">min</div></div>'+
+      '<div class="cd-box"><div class="n">'+pad(s)+'</div><div class="l">seg</div></div>';
+    msg.textContent = 'Falten ' + d + ' dies per agafar el vol.';
+  }
+  update();
+  setInterval(update, 1000);
+})();
+</script>
+</body>
+</html>
